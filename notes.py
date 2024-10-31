@@ -3,6 +3,7 @@
 # (define-struct dog [fur_color name age favorite_food])
 
 class Dog:
+    species = "canis  lupis familiarilis"
     # functions that start with __ are not intended to be called directly
     def __init__(self, n = "", fc = "", a = 0, ff = ""):
         """Creates an instance of the dog class and
@@ -21,18 +22,20 @@ class Dog:
     def play_fetch(self, num_times):
         self.fetch_count += num_times
 
+    def reset_fetch(self,):
+        self.fetch_count=0
+
     def paint_dog(self, color):
         self.fur_color = color
 
 #Instances of the dog class
-mydog = Dog("logan", "black", 7, "salmon")
+logan = Dog("logan", "black", 8, "salmon")
 chrisdog = Dog("luna", "black and white", 6, "tortillas")
-
-print(mydog)
+print(logan)
 print(chrisdog)
 
-mydog.play_fetch(20)
+logan.play_fetch(20)
 chrisdog.play_fetch(3)
 
-print(mydog)
+print(logan)
 print(f"{chrisdog.name} has played fetch {chrisdog.fetch_count} times")
