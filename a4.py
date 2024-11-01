@@ -21,6 +21,13 @@ class TTTBoard:
             return True
         elif (self.board[pos]=="X" or "O"):
             return False
+        
+    def has_won(self, player):
+        pass
+
+    def clear(self):
+        self.board=["* ", "* ", "* ","* ", "* ", "* ","* ", "* ", "* "]
+
 
 
 def play_tic_tac_toe() -> None:
@@ -86,7 +93,7 @@ if __name__ == "__main__":
     assert brd.game_over() == True
 
     brd.clear()
-
+    print(brd)
     assert brd.game_over() == False
 
     brd.make_move("O", 3)
