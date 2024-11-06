@@ -10,40 +10,39 @@ class TTTBoard:
             represent moves by player 'O' and '*'s are spots no one has yet played on
     """
     def __init__(self, board=[]):
-        self.board=["* ", "* ", "* ","* ", "* ", "* ","* ", "* ", "* "]
+        self.board = ["*"]* 9
 
     def __str__(self)->str:
         return f" {self.board[0]} {self.board[1]} {self.board[2]}\n {self.board[3]} {self.board[4]} {self.board[5]}\n {self.board[6]} {self.board[7]} {self.board[8]}" 
     
     def make_move(self, player, pos):
-        if (pos<9 and player=="X" or "O"):
-            self.board[pos]= player + " "
-            return True
-        elif (self.board[pos]=="X" or "O"):
+        if pos>8 or pos<0 or self.board[pos] !='*':
             return False
+        self.board[pos]=player
+        return True
         
     def has_won(self, player):
-        winnin_pos= [
-            [0, 1, 2],
-            [3, 4, 5],
-            [6, 7, 8],
-            [0, 3, 6],
-            [1, 4, 7],
-            [2, 5, 8],
-            [0, 4, 8],
-            [2, 4, 6]
-        ]
-
-        for positions in winnin_pos:
-            if all(self.board[i] == player[0] for i in positions):
-                return True
-            elif all(self.board[i] == playerclea[1] for i in positions):
-                return True
+        ps = [player] * 3 # either ['x', 'x', 'x'] or ['o', 'o', 'o']
+        # Check horizontal
+        if self.board[:3] == ps or self.board[3:6] == ps or self.board[6:] == ps:
+            return True
+        # Check Vertical
+        if self.board[::3] == ps or self.board[1::3] == ps or self.board[2::3] == ps:
+            return True
+        # Check Diagonal
+        if self.board[::4] == ps or self.board[2:7:2] == ps:
+            return True
+        
         return False
 
 
+    def game_over(self)->bool:
+        if self.has_won("X") or self.has_won("O") or "*" not in self.board:
+            return True
+        return False
+    
     def clear(self):
-        self.board=["* ", "* ", "* ","* ", "* ", "* ","* ", "* ", "* "]
+        self.board=["*"]*9
 
 
 
@@ -99,7 +98,7 @@ if __name__ == "__main__":
     brd.make_move("X", 8)
     brd.make_move("O", 7)
     print(brd)
-    #assert brd.game_over() == False
+    assert brd.game_over() == False
 
     brd.make_move("X", 5)
     brd.make_move("O", 6)
