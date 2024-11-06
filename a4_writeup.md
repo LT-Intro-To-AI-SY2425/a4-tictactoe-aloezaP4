@@ -5,6 +5,7 @@ In assignment 4 we created a basic tic tac toe game so that we could learn objec
 ## Reflection Questions
 
 1. What was the most difficult part to tic-tac-toe?
+The most difficult part of tic-tac-toe is 
 
 2. Explain how you would add a computer player to the game.
 
